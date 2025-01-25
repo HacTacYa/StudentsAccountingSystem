@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_profile.css')}}" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Профиль</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+        }
+
+        .mainmenu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            background-color: #333;
+            display: block;
+        }
+
+        .mainmenu li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .mainmenu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        .mainmenu li a:hover {
+            background-color: #5e4cdb;
+            text-decoration: underline;
+        }
+
+        .exit {
+            text-align: right;
+            margin-top: 10px;
+            padding-right: 20px;
+        }
+
+        .btn-logout {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #6c5ce7;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-logout:hover {
+            background-color: #5e4cdb;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+{% block content %}
+    {% if user_authenticated %}
+        <ul class="mainmenu">
+            {% for p in menu %}
+                <li><a href="{{ p.url }}">{{ p.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="exit">
+        <a href="{{ url_for('logout') }}" class="btn-logout">Выйти из профиля</a>
+    </div>
+
+    <div class="clear"></div>
+    <div class="content">
+        {% if title %}
+            <h1>{{ title }}</h1>
+        {% endif %}
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock content %}
+
+</body>
+</html>

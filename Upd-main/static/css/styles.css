@@ -1,0 +1,86 @@
+body {
+    background-color: #fff; /* Белый фон */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.register-container {
+    background-color: #f0f2f5; /* Светлый серый фон для формы */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.form-heading {
+    color: #007bff; /* Синий цвет для заголовка */
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.form-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #007bff; /* Синий цвет для надписей */
+    display: block;
+}
+
+.form-group input,
+.form-group select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #007bff; /* Синий цвет рамки для полей ввода и выпадающего меню */
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #6c63ff; /* Фиолетово-синий цвет для рамки при фокусе */
+    outline: none;
+}
+
+.btn-submit {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c63ff; /* Фиолетово-синий цвет для кнопок */
+    color: #fff; /* Белый цвет текста */
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background-color: #3c388d; /* Темно-фиолетово-синий цвет при наведении */
+}
+
+.flash {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #ff6b6b; /* Красный цвет для флеш-сообщений */
+    text-align: center;
+}
+
+.flash.success {
+    background-color: #4caf50; /* Зеленый цвет для успешных флеш-сообщений */
+}

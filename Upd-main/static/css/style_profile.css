@@ -1,0 +1,104 @@
+/* Обнуление стилей для браузера */
+body, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* Стили для главного меню */
+.mainmenu {
+    background: linear-gradient(135deg, #3C388D, #6C63FF); /* Градиент от синего к фиолетовому */
+    padding: 10px;
+}
+
+.mainmenu li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.mainmenu li a {
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.mainmenu li a:hover {
+    background-color: #555;
+}
+
+/* Стили для ссылки "Выйти из профиля" */
+.exit {
+    float: right;
+    margin-top: 10px;
+}
+.exit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.exit a {
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #3C388D, #6C63FF); /* Градиент от синего к фиолетовому */
+}
+
+.exit a:hover {
+    background-color: #e74c3c;
+}
+
+/* Стили для содержимого */
+.content {
+    margin-top: 20px;
+    background-color: #f0f0f0; /* Цвет фона для контента */
+    padding: 20px;
+}
+
+.content h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Стили для очистки флоатов */
+.clear {
+    clear: both;
+}
+
+.profile-container {
+    text-align: center;
+}
+
+.profile-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.profile-title {
+    color: #fff; /* Белый цвет для текста */
+    background: linear-gradient(135deg, #3C388D, #6C63FF); /* Сине-фиолетовый градиент */
+    padding: 10px; /* Добавим немного отступа для улучшения визуального вида */
+}
+
+.name {
+    color: #6C63FF; /* Фиолетовый цвет для имени студента */
+    font-weight: bold; /* Жирный шрифт для выделения имени */
+}
+
+
+#pic {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+}
+
+.name {
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+}

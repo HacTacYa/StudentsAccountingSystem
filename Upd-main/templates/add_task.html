@@ -1,0 +1,76 @@
+{% extends 'profilebase.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{ cat }}">{{ msg }}</div>
+{% endfor %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список задач</title>
+    <link type="text/css" href="{{ url_for('static', filename='css/style_profile.css') }}" rel="stylesheet"/>
+    <style>
+        .task-title {
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .task-details {
+            display: none;
+            margin: 5px 0 15px 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Список задач:</h2>
+
+<ul id="todoList">
+    {% if tasks %}
+        {% for title, description in tasks %}
+        <li>
+            <div class="task-title">{{ title }}</div>
+            <div class="task-details">{{ description }}</div>
+        </li>
+        {% endfor %}
+    {% else %}
+        <li>
+            <div class="task-title">Нет задач</div>
+        </li>
+    {% endif %}
+</ul>
+
+<form id="taskForm" method="post" action="{{ url_for('add_task') }}">
+    <input type="text" id="taskTitle" name="taskTitle" placeholder="Заголовок задачи" required>
+    <textarea id="taskDescription" name="taskDescription" placeholder="Описание задачи" required></textarea>
+
+    <select name="groupId" required>
+        <option value="">Выберите группу</option>
+        {% for group in groups %}
+        <option value="{{ group['id'] }}">{{ group['name'] }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Добавить задачу</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const taskTitles = document.querySelectorAll('.task-title');
+        taskTitles.forEach(function (taskTitle) {
+            taskTitle.addEventListener('click', function () {
+                const taskDetails = this.nextElementSibling;
+                if (taskDetails.style.display === 'none' || taskDetails.style.display === '') {
+                    taskDetails.style.display = 'block';
+                } else {
+                    taskDetails.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+{% endblock %}
