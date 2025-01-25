@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система НИРС</title>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать в систему организации научно-исследовательской работы студентов</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('tasks') }}">Задания</a></li>
+                <li><a href="{{ url_for('students') }}">Студенты</a></li>
+                <li><a href="{{ url_for('reports') }}">Отчеты</a></li>
+                <li><a href="{{ url_for('logout') }}">Выйти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Доступные задания для студентов</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <a href="{{ url_for('task_details', task_id=task.id) }}">Подробнее</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Система НИРС</p>
+    </footer>
+</body>
+</html>

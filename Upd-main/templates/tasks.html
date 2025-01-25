@@ -1,0 +1,143 @@
+{% extends 'profilebase.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="content-wrapper">
+    <h1 class="page-heading">Задачи для проекта "{{ project.name }}"</h1>
+
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Дата дедлайна</th>
+                    <th>Дата выполнения</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.end_date }}</td>  <!-- Отображение даты дедлайна -->
+                    <td>
+                        {% if task.completed_at %}
+                            {{ task.completed_at }}  <!-- Если задача выполнена, отображаем дату выполнения -->
+                        {% else %}
+                            Не завершена
+                        {% endif %}
+                    </td>
+                    <td>{{ task.status }}</td>  <!-- Статус задачи -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if not tasks %}
+    <p class="no-tasks">У проекта нет задач.</p>
+    {% endif %}
+
+    <div class="action-container-bottom">
+        <a href="{{ url_for('view_projects') }}" class="btn btn-secondary">Назад к проектам</a>
+    </div>
+</div>
+
+<style>
+    .content-wrapper {
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
+
+    .page-heading {
+        font-size: 28px;
+        color: #6c5ce7;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        font-size: 16px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table thead tr {
+        background-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .no-tasks {
+        text-align: center;
+        font-size: 18px;
+        color: #888;
+        margin-top: 20px;
+    }
+
+    .action-container-bottom {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background-color: #6c5ce7;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
+
+{% endblock %}

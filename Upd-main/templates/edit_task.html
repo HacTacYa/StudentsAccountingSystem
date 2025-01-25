@@ -1,0 +1,112 @@
+{% extends 'profilebase.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="content-wrapper">
+    <h1 class="page-heading">Редактировать задачу "{{ task.name }}"</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="title">Название:</label>
+            <input type="text" id="title" name="title" value="{{ task.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" required>{{ task.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="deadline">Срок сдачи (ГГГГ-ММ-ДД):</label>
+            <input type="date" id="deadline" name="deadline" value="{{ task.deadline }}">
+        </div>
+        <div class="form-group">
+            <label for="completed_at">Дата выполнения (ГГГГ-ММ-ДД):</label>
+            <input type="date" id="completed_at" name="completed_at" value="{{ task.completed_at|default('') }}">
+        </div>
+        <div class="form-group">
+            <label for="status">Статус:</label>
+            <select id="status" name="status" required>
+                <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>В ожидании</option>
+                <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>В процессе</option>
+                <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Завершена</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+
+    <div class="action-container-bottom">
+        <a href="{{ url_for('view_tasks', project_id=task.project_id) }}" class="btn btn-secondary">Назад к задачам</a>
+    </div>
+</div>
+
+<style>
+    .content-wrapper {
+        margin: 0 auto;
+        max-width: 600px;
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
+
+    .page-heading {
+        font-size: 24px;
+        color: #6c5ce7;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a4fcf;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .action-container-bottom {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}

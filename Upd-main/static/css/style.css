@@ -1,0 +1,54 @@
+.message-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #6c5ce7; /* Сине-фиолетовый цвет */
+    border-radius: 8px;
+    background-color: #dfe6e9; /* Более светлый сине-фиолетовый цвет */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-form .form-group {
+    margin-bottom: 15px;
+}
+
+.message-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #6c5ce7; /* Сине-фиолетовый цвет */
+}
+
+.message-form select,
+.message-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b2bec3; /* Светло-серый цвет */
+    border-radius: 4px;
+}
+
+.message-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c5ce7; /* Сине-фиолетовый цвет */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.message-form button:hover {
+    background-color: #4834d4; /* Темно-сине-фиолетовый цвет */
+}
+
+.message {
+    background-color: #ffffff; /* Белый цвет */
+    border: 1px solid #b2bec3; /* Светло-серый цвет */
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.message strong {
+    color: #6c5ce7; /* Сине-фиолетовый цвет */
+}

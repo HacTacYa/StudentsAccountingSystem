@@ -1,0 +1,35 @@
+{% extends 'profilebase.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+{% endfor %}
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link type="text/css" href="{{ url_for('static', filename='css/style_profile.css')}}" rel="stylesheet" />
+    <style>
+        #pic {
+            border-radius: 50%;
+        }
+        .name {
+            display: inline-block;
+            margin-left: 10px; /* just for spacing */
+        }
+    </style>
+</head>
+</body>
+</html>
+{% for cat, msg in get_flashed_messages(True) %}
+{% endfor %}
+<div class="profile-container">
+    <h1 class="profile-title">Мой профиль</h1>
+    <img src="data:image/png;base64,{{ image1 }}" id="pic" alt="No Image" width="200" height="200">
+    <span class="name">
+        {% for g in fio %}
+            {{ g }}
+        {% endfor %}
+    </span>
+</div>
+{% endblock %}

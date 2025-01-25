@@ -1,0 +1,101 @@
+{% extends 'profilebase.html' %}
+
+{% block content %}
+    {{ super() }}
+    <hr>
+    <div style="max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #6c5ce7; text-align: center;">Чат</h2>
+        <div id="chat-container" style="border: 1px solid #6c5ce7; border-radius: 8px; padding: 10px; background-color: #f8f9fa;"></div>
+
+        <script>
+        function fetchMessages() {
+            const recipientId = document.getElementById('recipient').value; // ID выбранного получателя
+            fetch('/get_messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ recipient: recipientId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatContainer = document.getElementById('chat-container');
+                chatContainer.innerHTML = ''; // Очистить существующие сообщения
+
+                if (data.success) {
+                    data.messages.forEach(message => {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'message';
+                        messageDiv.innerHTML = `<strong>${message.sender_id}</strong>: ${message.message}`;
+                        chatContainer.appendChild(messageDiv);
+                    });
+                } else {
+                    chatContainer.innerHTML = `<div class="error">${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при получении сообщений:', error);
+            });
+        }
+
+        function sendMessage(event) {
+            event.preventDefault(); // Предотвратить перезагрузку страницы
+            const messageText = document.getElementById('message').value;
+            const recipientId = document.getElementById('recipient').value;
+
+            fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    recipient: recipientId,
+                    message: messageText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('message').value = ''; // Очистить поле ввода
+                    fetchMessages(); // Обновить сообщения
+                } else {
+                    console.error('Ошибка при отправке сообщения:', data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке сообщения:', error);
+            });
+        }
+
+        // Получение сообщений при загрузке страницы
+        window.onload = fetchMessages;
+        document.getElementById('message-form').addEventListener('submit', sendMessage);
+        </script>
+
+        <hr>
+        <h2 style="color: #6c5ce7; text-align: center;">Отправить сообщение</h2>
+        <form id="message-form" class="message-form" style="text-align: center;">
+            <div class="form-group" style="margin-bottom: 10px;">
+                <label for="recipient" style="color: #6c5ce7;">Получатель:</label>
+                <select name="recipient" id="recipient" style="border: 1px solid #6c5ce7; border-radius: 4px; padding: 5px;">
+                    {% for p in users %}
+                        <option value="{{ p.id }}">{{ p.name }} {{ p.surname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 10px;">
+                <label for="message" style="color: #6c5ce7;">Сообщение:</label><br>
+                <textarea name="message" id="message" cols="30" rows="5" style="border: 1px solid #6c5ce7; border-radius: 4px; padding: 5px;"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn-submit" style="background-color: #6c5ce7; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer;">Отправить</button>
+            </div>
+        </form>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('message-form').addEventListener('submit', sendMessage);
+        });
+        </script>
+    </div>
+{% endblock %}

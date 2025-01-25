@@ -1,0 +1,118 @@
+{% extends 'profilebase.html' %}
+
+{% block page_content %}
+<div class="content-wrapper">
+    <h2 class="page-heading">Список мероприятий</h2>
+
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Дата начала</th>
+                    <th>Ссылка</th>
+                    <th>Связанные проекты</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>{{ event.start_date }}</td>
+                    <td><a href="{{ event.link }}" target="_blank">Перейти</a></td>
+                    <td>{{ event.project_names }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="action-container-bottom">
+        <a href="{{ url_for('add_event') }}" class="btn btn-primary">Добавить мероприятие</a>
+    </div>
+</div>
+
+<style>
+    .content-wrapper {
+        margin: 0 auto;
+        max-width: 1000px;
+        padding: 30px;
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .page-heading {
+        font-size: 28px;
+        color: #6c5ce7;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        font-size: 16px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .styled-table thead tr {
+        background-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    .styled-table th, .styled-table td {
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #f9f9f9;
+    }
+
+    .styled-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .action-container-bottom {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a4ae3;
+    }
+</style>
+
+{% endblock %}
